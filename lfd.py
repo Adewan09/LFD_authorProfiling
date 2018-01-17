@@ -32,9 +32,10 @@ for f in files:
             sansusers = re.sub(r"(?:\@|https?\://)\S+","",root[t].text)
             sansurl = re.sub(r'http\S+','',sansusers)
             tags.append({tag.strip("#") for tag in sansurl.split() if tag.startswith("#")})
-            tweets.append(sansurl)
+            sanstags = re.sub(r'#', '',sansurl)
+            tweets.append(sanstags)
         author_tweets.append((authorids[f_index],tweets))
         author_tags.append((authorids[f_index],tags))
         
-#author_tweets[author index][1][tweet indices] gives one of the multiple tweets
+#author_tweets[author index][1][tweet index] gives one of the multiple tweets
 #author_tweets[author index][0] gives author id
